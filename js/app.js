@@ -28,7 +28,7 @@ function getRandomPhraseAsArray(array) {
 function addPhraseToDisplay(array) {
   for (let i = 0; i < array.length; i++) {
     const li = document.createElement('li');
-    li.textContent = array[i];
+    li.textContent = array[i].toUpperCase();
     document.querySelector('ul').appendChild(li);
     if (array[i] != ' ') {
       li.classList.add('letter');
@@ -38,17 +38,33 @@ function addPhraseToDisplay(array) {
   }
 }
 
-function checkLetter(btn) {
+function checkLetter(button) {
   const letters = document.querySelectorAll('.letter');
-  let matchLetter = null;
-
-  for ( let i = 0; i < letters.length; i++ ) {
-    if ( btn.textContent == letters[i].textContent ) {
-      matchLetter = btn.textContent;
-      letters[i].className += ' show';
+  let match = null;
+  for (let i = 0; i < letters.length; i++) {
+    if (button.textContent.toUpperCase() == letters[i].textContent) {
+      match = button.textContent;
+      letters[i].classList.add('show');
     }
   }
-  return matchLetter;
+  return match;
+}
+
+function checkWin() {
+  const shownLetters = document.querySelectorAll('.show');
+  const letters = document.querySelectorAll('.letter');
+  const overlay = document.querySelector('#overlay');
+  if (shownLetters.length == letters.length) {
+    overlay.classList.replace('start', 'win');
+    overlay.children[0].textContent = 'You Won!';
+    overlay.children[1].textContent = 'Play Again';
+    overlay.style.display = '';
+  } else if (missed === 5) {
+    overlay.classList.replace('start', 'lose');
+    overlay.children[0].textContent = 'You Lost!';
+    overlay.children[1].textContent = 'Try Again';
+    overlay.style.display = '';
+  }
 }
 
 
@@ -62,12 +78,19 @@ qwerty.addEventListener('click', (event) => {
   if (event.target.tagName === 'BUTTON') {
     buttonClicked.className = 'chosen';
     buttonClicked.disabled = true;
-    const letterMatch = checkLetter(buttonClicked);
-    console.log(letterMatch);
+    const letterFound = checkLetter(buttonClicked);
+    if (letterFound == null) {
+      missed += 1;
+    }
+    if (missed >= 1 && missed <= 5) {
+      const hearts = document.getElementsByTagName('img');
+      hearts[missed - 1].src = 'images/lostHeart.png';
+    }
   }
+  checkWin();
 });
 
-
+console.log(document.querySelector('#overlay').children[0])
 
 const phraseArray = getRandomPhraseAsArray(phrases);
 addPhraseToDisplay(phraseArray);

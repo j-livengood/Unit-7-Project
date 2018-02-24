@@ -96,19 +96,31 @@ Add an event listener to the keyboard.
           elements have an attribute you can set called “disabled” that when set to true will not respond to 
           user clicks. See the MDN documentation for more details.
   
-  Pass the button to the checkLetter function, and store the letter returned inside of a variable called 
-  letterFound. At this point, you can open the index.html file, click any of the letters on the keyboard, 
-  and start to see the letters appear in the phrase.
+  CHECK - Pass the button to the checkLetter function, and store the letter returned inside of a variable called 
+          letterFound. At this point, you can open the index.html file, click any of the letters on the keyboard, 
+          and start to see the letters appear in the phrase.
 
 
 
 Count the missed guesses in the game.
-  If the checkLetter function returns a null value, the player has guessed the wrong letter. In the keyboard event listener, after checkLetter is called, write a statement to check the value of the letterFound variable. If the value is null, remove one of the tries from the scoreboard. If you haven't created it yet, make sure you have a missed variable to store the state of the scoreboard (initialized to 0). When you remove a try from the scoreboard, make sure to increase the missed count by 1.
+  CHECK - If the checkLetter function returns a null value, the player has guessed the wrong letter.
+  
+  CHECK - In the keyboard event listener, after checkLetter is called, write a statement to check the value of the letterFound variable.
+  
+  CHECK - If the value is null, remove one of the tries from the scoreboard.
+  
+  CHECK - If you haven't created it yet, make sure you have a missed variable to store the state of the scoreboard (initialized to 0).
+  
+  CHECK - When you remove a try from the scoreboard, make sure to increase the missed count by 1.
 
 
 
 Create a checkWin function.
-  Each time the player guesses a letter, this function will check whether the game has been won or lost. At the very end of the keyboard event listener, you’ll run this function to check if the number of letters with class “show” is equal to the number of letters with class “letters”. If they’re equal, show the overlay screen with the “win” class and appropriate text. Otherwise, if the number of misses is equal to or greater than 5, show the overlay screen with the “lose” class and appropriate text.
+  CHECK - Each time the player guesses a letter, this function will check whether the game has been won or lost.
   
+  CHECK - At the very end of the keyboard event listener, you’ll run this function to check if the number of 
+          letters with class “show” is equal to the number of letters with class “letters”. 
   
+  CHECK - If they’re equal, show the overlay screen with the “win” class and appropriate text. 
   
+  CHECK - Otherwise, if the number of misses is equal to or greater than 5, show the overlay screen with the “lose” class and appropriate text.
