@@ -5,7 +5,6 @@
 // Variables ====================================================================================
 
 const qwerty = document.querySelector('#qwerty');
-const phrase = document.querySelector('#phrase');
 const startButton = document.querySelector('.btn__reset');
 let missed = 0;
 
@@ -15,7 +14,7 @@ const phrases = [
   'Lets be bad guys',
   'Bullet in the brain pan squish',
   'Im not a grandpa'
-]
+];
 
 
 
@@ -102,7 +101,7 @@ qwerty.addEventListener('click', (event) => {
     
     const letterFound = checkLetter(buttonClicked);
     
-    if (letterFound == null) {
+    if (letterFound === null) {
       missed += 1;
     }
     
