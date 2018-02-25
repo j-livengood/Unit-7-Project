@@ -1,8 +1,8 @@
-//==============================================================
+//===============================================================================================
 // JavaScript
-// =============================================================
+// ==============================================================================================
 
-// Variables
+// Variables ====================================================================================
 
 const qwerty = document.querySelector('#qwerty');
 const phrase = document.querySelector('#phrase');
@@ -19,17 +19,20 @@ const phrases = [
 
 
 
-// Functions
+// Functions ==========================================================================================
 
+// create random number, get the phrase at that position in the phrases array, split into single parts
 function getRandomPhraseAsArray(array) {
   return array[Math.round(Math.random() * (array.length - 1))].split('');
 }
 
+// take the split array from above and create then append li elements for each array item
 function addPhraseToDisplay(array) {
   for (let i = 0; i < array.length; i++) {
     const li = document.createElement('li');
     li.textContent = array[i].toUpperCase();
     document.querySelector('ul').appendChild(li);
+    
     if (array[i] != ' ') {
       li.classList.add('letter');
     } else {
@@ -38,9 +41,11 @@ function addPhraseToDisplay(array) {
   }
 }
 
+// if the clicked letter matches a letter in the array, show the letter
 function checkLetter(button) {
   const letters = document.querySelectorAll('.letter');
   let match = null;
+  
   for (let i = 0; i < letters.length; i++) {
     if (button.textContent.toUpperCase() == letters[i].textContent) {
       match = button.textContent;
@@ -50,10 +55,12 @@ function checkLetter(button) {
   return match;
 }
 
+// check score and display appropriate overlay screen
 function checkWin() {
   const shownLetters = document.querySelectorAll('.show');
   const letters = document.querySelectorAll('.letter');
   const overlay = document.querySelector('#overlay');
+  
   if (shownLetters.length == letters.length) {
     overlay.classList.replace('start', 'win');
     overlay.children[0].textContent = 'You Won!';
@@ -67,14 +74,16 @@ function checkWin() {
   }
 }
 
+// restart game after win or loss
 function restart() {
   location.reload();
 }
 
 
 
-// Event Listeners
+// Event Listeners =======================================================================
 
+// start game or reset game
 startButton.addEventListener('click', () => {
   if (startButton.textContent === 'Start Game') {
     startButton.parentElement.style.display = 'none';
@@ -83,15 +92,20 @@ startButton.addEventListener('click', () => {
   }
 });
 
+// listen for clicked keyboard letter and update score
 qwerty.addEventListener('click', (event) => {
   const buttonClicked = event.target;
+  
   if (event.target.tagName === 'BUTTON') {
     buttonClicked.className = 'chosen';
     buttonClicked.disabled = true;
+    
     const letterFound = checkLetter(buttonClicked);
+    
     if (letterFound == null) {
       missed += 1;
     }
+    
     if (missed >= 1 && missed <= 5) {
       const hearts = document.getElementsByTagName('img');
       hearts[missed - 1].src = 'images/lostHeart.png';
@@ -100,7 +114,9 @@ qwerty.addEventListener('click', (event) => {
   checkWin();
 });
 
-console.log(document.querySelector('#overlay').children[0])
+
+
+// Initiate Game ========================================================================
 
 const phraseArray = getRandomPhraseAsArray(phrases);
 addPhraseToDisplay(phraseArray);
