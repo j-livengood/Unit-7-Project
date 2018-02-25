@@ -27,6 +27,7 @@ body {
   flex-direction: column;
   display: flex;
   height: 100vh;
+  background-color: #f0f0f0;
 }
 
 li, ol, ul {
@@ -99,8 +100,9 @@ button {
 }
 
 .show {
-  color: #000;
+  color: #f7f7f7;
   background-color: #76CE82;
+  transition: background-color 1s;
 }
 
 /* Keyboard */

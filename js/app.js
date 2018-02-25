@@ -67,11 +67,21 @@ function checkWin() {
   }
 }
 
+function restart() {
+  location.reload();
+}
+
 
 
 // Event Listeners
 
-startButton.addEventListener('click', () => startButton.parentElement.style.display = 'none');
+startButton.addEventListener('click', () => {
+  if (startButton.textContent === 'Start Game') {
+    startButton.parentElement.style.display = 'none';
+  } else {
+    restart();
+  }
+});
 
 qwerty.addEventListener('click', (event) => {
   const buttonClicked = event.target;
